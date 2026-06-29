@@ -1,0 +1,20 @@
+.env
+
+# Warpline federation runtime store
+.weft/
+
+# Legis — local working dir / config (regenerated/local; never commit)
+.weft/legis/
+/.weft/legis/operator_session.json
+/.weft/legis/operator.age
+
+# Filigree issue tracker
+.filigree/
+# Plainweave local runtime store (SQLite runtime state, like the sibling weft stores)
+.plainweave/
+# Wardline scan artifacts
+.wardline/
+findings.jsonl
+
+# Filigree server-mode MCP config embeds a literal federation token
+.mcp.json

@@ -5,12 +5,17 @@ Produce the **initial assessment** (scope / risks / timeline for Stage 1 + Stage
 needs) — the owner's first and only requested deliverable — then derive the **high-level design**
 and stand up the Stage 0 harness foundation. North-star it serves: defensible-evidence yield.
 
+## Published
+- **Remote:** https://github.com/tachyon-beep/fable — **public**, "Autonomous Project by Claude"
+  (PDR-0004). `main` tracks `origin/main`. README carries the label.
+
 ## In flight
-- **Initial assessment** — written → `docs/product/initial-assessment.md` (draft for owner review).
-  Owner deliverable; gates the build. Folds in the operational/continuity support the owner offered.
+- **Initial assessment** — written + committed → `docs/product/initial-assessment.md` (draft for
+  owner review). Owner deliverable; gates the build. Folds in the operational/continuity support
+  the owner offered.
 - **Workspace bootstrap** — vision/roadmap/metrics/current-state + PDR-0001 (framing),
-  PDR-0002 (grant), PDR-0003 (scope extension + resources) written. Not yet committed
-  (presenting first; checkpoint owns the commit).
+  PDR-0002 (grant), PDR-0003 (scope extension + resources), PDR-0004 (public release) committed
+  (genesis `91b875d`, README `5f88e50`, pushed to origin).
 
 ## Open questions / blocked-on-owner
 - **Confirm the reconstructed framing** in `vision.md` (audience, research-instrument purpose) —

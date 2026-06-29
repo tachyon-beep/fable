@@ -18,3 +18,16 @@ findings.jsonl
 
 # Filigree server-mode MCP config embeds a literal federation token
 .mcp.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.uv-cache/

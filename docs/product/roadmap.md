@@ -7,22 +7,19 @@
 > not in this file.
 
 ## Now  (committed, in-flight)
-- **Initial assessment** — the owner's first and only requested deliverable: scope, risks,
-  and timeline for Stage 1 *and* Stage 2, plus execution needs. · artifact: `initial-assessment.md`
-  · metric: unblocks everything (gate before build)
-- **Stage 0 — harness foundation** — the structured world interface + GM/resolver +
-  event-sourced, schema-valid logs + the no-narration-into-reality invariant; prove agents
-  are constrained and traces are clean. Begins on assessment acceptance. · tracker: epics TBD
-  · metric: run-validity rate, world-state-hallucination rate (guardrail)
+- **Initial assessment** — delivered (owner's first deliverable). · artifact: `initial-assessment.md`
+- **Stage 0 — harness foundation** — structured world interface + rule-based GM + Effects
+  boundary + event-sourced replayable logs + the no-narration invariant; prove agents are
+  constrained and traces are clean. Design reviewed (HLD v2, PDR-0005..0008). · tracker:
+  **fable-1c6ca715c5** (15 tasks) · metric: run-validity rate, world-state-hallucination rate (guardrail)
 
 ## Next (shaped, decreasing certainty)
-- **Stage 1 — one-generation causal experiment** — 24 agents (2 tribes × 4 families × 3),
-  ≥30–50 replicated runs, fixed 12-event arc + held-out adolescent tests, family-condition
-  counterbalanced across tribes, 3-layer blind evaluator, pre-registered world-policy table
-  and primary contrasts. Produces the **initial results**. · metric: defensible-evidence yield,
-  evaluator reliability (κ)
+- **Stage 1 — one-generation causal experiment** — 24 agents, power-derived replication, fixed
+  12-event arc + held-out tests, counterbalanced conditions, 3-layer blind evaluator,
+  pre-registered DV + world-policy table. Produces the **initial results**. Full batch gated by
+  PDR-0009 (budget). · tracker: **fable-6a4b84af09** · metric: defensible-evidence yield, κ
 
-## Later (directional bets, no order, no dates)
+## Later (directional bets, no order, no dates) · tracker: **fable-5026ddd67a**
 - **Stage 2 — generational transmission** — child→parent transformation (with summariser-bias
   controls: human / LLM / no-memory / direct-inheritance arms), second generation, frozen world
   policy + event schedule.

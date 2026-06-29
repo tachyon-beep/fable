@@ -1,46 +1,46 @@
-# Current State — fable        Checkpoint: 2026-06-29 (design review synthesised)
+# Current State — fable        Checkpoint: 2026-06-29 (Stage 0 build started)
 
 ## The bet right now
-Turn the two design docs into a finished product + initial results. Design is reviewed and revised;
-the gate before building is the owner's **Stage-1 budget + world-policy decision** (PDR-0009).
+Build the Stage 0 harness (tracker epic **fable-1c6ca715c5**). Design is reviewed + frozen
+(HLD v2, PDR-0005..0008). Full Stage-1 execution is gated by the owner's budget decision (PDR-0009).
 North-star: defensible-evidence yield.
 
-## Published
-- **Remote:** https://github.com/tachyon-beep/fable — public, "Autonomous Project by Claude".
+## Published / built
+- **Remote:** https://github.com/tachyon-beep/fable (public). Latest commit `35ddc00`.
+- **Code (Stage 0 foundations):** `uv` project (src layout, strict mypy, ruff, pytest). Boundary
+  schemas — `FableModel` base, `ActionType` verb set + `AgentActionProposal` (REQ-0002),
+  `Change`/`GMResolution`/`WorldStateDelta` with typed source + mandatory `source_resolution_id`
+  (REQ-0001). **Content-aware zero-hallucination audit** (`fable.audit`, REQ-0001/PDR-0008):
+  orphan + unsanctioned-change detection, 12 tests green, ruff+mypy clean, wardline exit 0.
 
-## Awaiting owner (the one thing blocking full Stage 1)
-- **PDR-0009 (ESCALATION):** the full Stage-1 batch is plausibly **~$2k–$6k** (1–2 orders over the
-  ~$50 envelope). Two coupled decisions are yours: (1) Stage-1 budget ceiling (sets replication
-  count / statistical strength); (2) world-policy neutrality — single conditional policy + rationale
-  doc (cheaper) vs a 2-level world-policy factor (~2× cost, stronger). My recommendation: phase it
-  — Stage-0 pilot in-envelope, then a ~$50–150 calibration batch to replace estimates with measured
-  cost/κ/variance, then a precise budget request. **Nothing full-Stage-1 runs until you sign off.**
-- Also useful when convenient: a human evaluator-calibration auditor (κ sample); ratify the two
-  `[INFERRED]` vision items.
+## Awaiting owner (does NOT block Stage 0)
+- **PDR-0009 (ESCALATION):** Stage-1 full batch ≈ $2k–$6k. Need a budget ceiling + world-policy
+  choice (single conditional vs 2-level factor). Recommended: pilot → ~$50–150 calibration batch →
+  precise budget request. Nothing full-Stage-1 runs until signed off.
+- Human evaluator-calibration auditor (κ); ratify the two `[INFERRED]` vision items.
 
-## Done this session
-- Workspace bootstrap + initial assessment (owner's first deliverable) — committed + public.
-- **Requirements** REQ-FABLE-0001..0022 baselined in Plainweave (approved, with criteria).
-- **HLD v2** (`docs/design/hld.md`) — derived from the docs, then **revised after two adversarial
-  design reviews** (persisted under `docs/design/reviews/`).
-- **Design decisions PDR-0005..0009:** rule-based deterministic GM; reproducibility architecture
-  (one Effects boundary + structural keying + state-hash oracle + determinism-class-by-surface);
-  apparatus is first-class (Experiment Orchestrator + Analysis + config artifacts in the freeze
-  set); measurement defensibility (operationalised primary DV, pre-registration as a gate, DV
-  anchored on rule-based+human, tribe as fixed context); cost/power escalation (PDR-0009).
+## Stage 0 task status (epic fable-1c6ca715c5, 15 tasks)
+- ✅ Project scaffold + tooling (fable-a69c7725d2) — closed.
+- ◐ Freeze 9 I/O schemas (fable-28d369e68d) — 3 of 9 done (action, resolution, delta). Remaining:
+  AgentObservationPacket, MemoryWrite, FamilyReflectionRecord, EvaluatorInput, EvaluatorScore, RunManifest.
+- ◐ Content-aware audit (fable-c59e57eb84) — delta-audit done + tested; speech-channel provenance
+  guard pending (needs memory/observation schemas).
+- ☐ Config-artifact schemas, Effects boundary, event log, world store, rule-based GM, state-hash
+  oracle/replay, agent runtime, memory store, family reflection, scheduler, run controller, pilot.
 
 ## Next session, start here
-1. **Reconcile the Plainweave requirements baseline to the PDRs** — add requirements for: Effects
-   substitution boundary + structural keying; per-step state-hash oracle; determinism class by
-   surface; extended RunManifest fields; pre-registration as a gate; content-hash pinning of config
-   artifacts; speech-channel provenance guard; power-derived replication. Amend GM (deterministic),
-   RunManifest (0007), replication (0020), cost (0022) where the decision refined them.
-2. **Create Stage 0/1/2 tracker epics** in filigree; wire IDs into roadmap.md.
-3. **Freeze the schema set** (9 I/O + config artifacts) as versioned pydantic models — first code.
-4. Begin Stage 0 harness against the REQ-0001 content-aware zero-hallucination exit gate.
-5. (Owner-gated) on PDR-0009 sign-off: calibration batch → measured cost model → Stage-1 plan.
+1. Finish the remaining 6 I/O schemas + config-artifact schemas (content-hash pinned) — TDD.
+2. Effects boundary (structural keying, record/replay) + event log (JSONL+SQLite, JCS for hashes).
+3. World store + **rule-based GM** — **annotate wardline trust boundaries** here (REQ-0009; the
+   taint gate is currently INERT, noted on task fable-cf421e38b8) so the gate actually enforces.
+4. State-hash divergence oracle + replay loop; then agent runtime, memory, reflection, scheduler,
+   run controller; then the 12-agent pilot vs the zero-hallucination exit gate.
+5. **Reconcile the Plainweave requirements baseline to PDR-0005..0009** (new reqs: Effects boundary,
+   state-hash, determinism-class, RunManifest fields, pre-registration gate, content-hash pinning,
+   speech-channel provenance, power-derived replication) — still outstanding from the design synthesis.
+6. (Owner-gated) on PDR-0009 sign-off: calibration batch → measured cost model → Stage-1 plan.
 
 ## Resources in hand
-OpenRouter (model choice mine; agents stochastic, evaluator a different family pinned temp=0; GM
-uses no LLM); local Ollama embeddings optional; CUDA optional; full repo control; weft suite
-(filigree backlog, plainweave requirements, wardline boundary, loomweave/warpline archaeology).
+OpenRouter (model choice mine; agents stochastic, evaluator different-family temp=0, GM no-LLM);
+local Ollama embeddings optional; CUDA optional; full repo control; weft suite. Build: `uv run pytest`,
+`.venv/bin/ruff check src tests`, `.venv/bin/mypy`, `wardline scan . --fail-on ERROR`.

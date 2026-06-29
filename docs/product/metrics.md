@@ -1,4 +1,4 @@
-# Metrics — fable             Last read: 2026-06-29
+# Metrics — fable             Last read: 2026-06-30
 
 > **Provisional (bootstrap).** No harness exists yet, so every Current reading is a true
 > baseline of 0 / n-a. TARGET numbers and dates below are placeholders the owner confirms when
@@ -21,7 +21,15 @@
 ## Guardrails (must NOT degrade)
 | Metric | Floor / ceiling | Current | Read on |
 |--------|-----------------|---------|---------|
-| **World-state hallucination rate** — agent narration silently mutating world state | = 0 (hard ceiling; the core architectural invariant) | n/a | 2026-06-29 |
-| Evaluator-blind compliance — evaluator never sees family-condition labels | = 100% | n/a | 2026-06-29 |
-| Run reproducibility — % runs re-instantiable from a complete RunManifest | = 100% (manifest completeness) | n/a | 2026-06-29 |
-| Cost per experiment batch | ≤ ~$50 (autonomous envelope; above = escalate) | n/a | 2026-06-29 |
+| **World-state hallucination rate** — agent narration silently mutating world state | = 0 (hard ceiling; the core architectural invariant) | enforcement mechanism implemented + 12 unit tests green; no live-run reading (0 runs) | 2026-06-30 |
+| Evaluator-blind compliance — evaluator never sees family-condition labels | = 100% | n/a (evaluator not built) | 2026-06-29 |
+| Run reproducibility — % runs re-instantiable from a complete RunManifest | = 100% (manifest completeness) | n/a (manifest not built) | 2026-06-29 |
+| Cost per experiment batch | ≤ ~$50 (autonomous envelope; above = escalate) | Stage-1 full-batch est. **~$2k–$6k** → exceeds envelope → escalation **PDR-0009** | 2026-06-30 |
+
+## Readings log
+- **2026-06-30 (checkpoint):** (1) **Cost guardrail tripped for Stage 1** — the design review
+  estimated the full Stage-1 batch at ~$2k–$6k, far above the ~$50/batch autonomous envelope; this
+  is the live escalation in PDR-0009 (Stage-0 itself stays in-envelope). (2) The world-state
+  hallucination guardrail now has a *tested enforcement mechanism* (content-aware audit, `fable.audit`,
+  12 tests green) — but the metric itself is unread until live runs exist. No PDR reversal trigger
+  fired beyond the already-recorded cost escalation.

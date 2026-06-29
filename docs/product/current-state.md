@@ -1,4 +1,4 @@
-# Current State — fable        Checkpoint: 2026-06-29 (Stage 0 build started)
+# Current State — fable        Checkpoint: 2026-06-30 (product-checkpoint; Stage 0 build in progress)
 
 ## The bet right now
 Build the Stage 0 harness (tracker epic **fable-1c6ca715c5**). Design is reviewed + frozen
